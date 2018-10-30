@@ -1,0 +1,16 @@
+{
+  "name": "videojs.pulse",
+  "version": "3.0.0",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "babel-preset-env": "^1.7.0",
+    "grunt": "^1.0.3",
+    "grunt-babel": "^8.0.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-uglify": "~0.9.1",
+    "load-grunt-tasks": "^4.0.0"
+  },
+  "private": true
+}
