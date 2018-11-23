@@ -755,8 +755,8 @@
                     gdprPersonalDataIncluded: sessionSettings.gdprPersonalDataIncluded
                 };
 
-                requestSettings.width = requestSettings.width || player.width();
-                requestSettings.height = requestSettings.height || player.height();
+                requestSettings.width = requestSettings.width || player.currentWidth();
+                requestSettings.height = requestSettings.height || player.currentHeight();
 
                 // Remove the empty fields for the SDK
                 cleanObject(requestSettings);
