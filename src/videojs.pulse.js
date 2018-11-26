@@ -70,6 +70,11 @@
             if (forceSharedElement) {
                 useShared = true;
                 log('Using shared element because pulse_force_shared parameter is present');
+                
+            } else if(player.autoplay() === false || (queryParams.hasOwnProperty('autoplay') && queryParams.autoplay === 'false')) {
+                adPlayerOptions.setAutoplayAttributes = false;
+                log('Autoplay set to \'false\' by the video player/query parameters, will not try to autoplay ads');
+
             } else {
                 var autoplayMode = 'normal';
 
@@ -78,6 +83,7 @@
                 } else if (!isAutoplaySupported()) {
                     autoplayMode = 'shared';
                 }
+
                 if (autoplayMode === 'shared') {
                     useShared = true;
                     log('Using shared element because autoplay support was not detected');
@@ -749,8 +755,8 @@
                     gdprPersonalDataIncluded: sessionSettings.gdprPersonalDataIncluded
                 };
 
-                requestSettings.width = requestSettings.width || player.width();
-                requestSettings.height = requestSettings.height || player.height();
+                requestSettings.width = requestSettings.width || player.currentWidth();
+                requestSettings.height = requestSettings.height || player.currentHeight();
 
                 // Remove the empty fields for the SDK
                 cleanObject(requestSettings);
