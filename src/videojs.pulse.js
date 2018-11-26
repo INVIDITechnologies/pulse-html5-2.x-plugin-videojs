@@ -71,7 +71,7 @@
                 useShared = true;
                 log('Using shared element because pulse_force_shared parameter is present');
                 
-            } else if(player.autoplay() === false || (queryParams.hasOwnProperty('autoplay') && queryParams.autoplay === false)) {
+            } else if(player.autoplay() === false || (queryParams.hasOwnProperty('autoplay') && queryParams.autoplay === 'false')) {
                 adPlayerOptions.setAutoplayAttributes = false;
                 log('Autoplay set to \'false\' by the video player/query parameters, will not try to autoplay ads');
 
