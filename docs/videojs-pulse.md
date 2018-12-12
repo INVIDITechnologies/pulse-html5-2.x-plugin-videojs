@@ -20,7 +20,7 @@ Initializes the plugin for the given player.
 
 ### `adPlayer`
 
-The Ooyala Pulse ad player controller. To get the full ad player SDK, check out the [SDK documentation](http://pulse-sdks.ooyala.com/pulse-html5/latest/index.html).
+The INVIDI Pulse ad player controller. To get the full ad player SDK, check out the [SDK documentation](http://pulse-sdks.videoplaza.com/pulse-html5/latest/index.html).
 
 ## Methods of player.pulse
 
@@ -37,7 +37,7 @@ Start a new ad session. This method should only be useful if you provide your ow
 
 ### `addEventListener(event, callback)`
 
-Add an event listener to the Pulse ad player to access event data or to add your own logic to the event handling. All ad player events are listed [here](http://pulse-sdks.ooyala.com/pulse-html5/latest/OO.Pulse.AdPlayer.Events.html).
+Add an event listener to the Pulse ad player to access event data or to add your own logic to the event handling. All ad player events are listed [here](http://pulse-sdks.videoplaza.com/pulse-html5/latest/OO.Pulse.AdPlayer.Events.html).
 
  * **Parameters:**
    * `event` — to listen to

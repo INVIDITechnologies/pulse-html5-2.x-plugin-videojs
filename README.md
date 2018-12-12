@@ -1,7 +1,7 @@
-# Ooyala Pulse Plugin for VideoJS and Brightcove Player
+# INVIDI Pulse Plugin for VideoJS and Brightcove Player
 
 ## Introduction
-The Pulse plugin in this repository can be used to create an integration between Pulse and your VideoJS or Brightcove Player. The plugin is built on top of the Pulse HTML5 ad player, which is part of [ HTML5 Pulse SDK](http://pulse-sdks.ooyala.com/pulse-html5/latest/).
+The Pulse plugin in this repository can be used to create an integration between Pulse and your VideoJS or Brightcove Player. The plugin is built on top of the Pulse HTML5 ad player, which is part of [ HTML5 Pulse SDK](http://pulse-sdks.videoplaza.com/pulse-html5/latest/).
 
 ## Build
     npm install

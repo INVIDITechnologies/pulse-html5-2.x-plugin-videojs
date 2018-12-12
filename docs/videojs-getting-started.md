@@ -1,6 +1,6 @@
 # Getting Started with VideoJS
 
->:warning: To integrate, you must have a VideoJS player v5.x up and running on your site, as well as an Ooyala Pulse account and a unique ID (pulseHost).
+>:warning: To integrate, you must have a VideoJS player v5.x up and running on your site, as well as an INVIDI Pulse account and a unique ID (pulseHost).
 
 1. Load the HTML5 Pulse SDK on the page with your VideoJS player.
 
@@ -14,7 +14,7 @@
 1. Load the Pulse VideoJS plugin after the HTML5 Pulse SDK on the page with your VideoJS player. You have three options:
   - Use the videojs.pulse.js file in the src folder directly,
   - or build the project first to use the minified version (videojs.pulse-x.x.x.min.js, where x.x.x is the version number) in the dist folder,
-  - or load the plugin from Ooyala's CDN, which ensures you always have the latest version in your integration.
+  - or load the plugin from INVIDI's CDN, which ensures you always have the latest version in your integration.
 
   ```
   <script type="text/javascript" src="http://your_hosting_location/videojs.pulse.js"></script>
@@ -32,7 +32,7 @@
   ```
   <script type="text/javascript" src="https://service.videoplaza.tv/proxy/pulse-sdk-html5-skin/base.min.js"></script>
   ```
-  >The skin for the ad player is located at [HTML5 Ad Player Skins](https://github.com/ooyala/pulse-sdk-html5-2.x-skins).
+  >The skin for the ad player is located at [HTML5 Ad Player Skins](https://github.com/INVIDITechnologies/pulse-sdk-html5-2.x-skins).
 
 1. Initialize the plugin, passing in the options, which is an object containing:
   - your Pulse global settings,

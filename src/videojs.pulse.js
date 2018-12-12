@@ -349,7 +349,7 @@
             /**
              * Add an event listener to the Pulse ad player to access event data or to add
              * your own logic to the event handling. All ad player events are listed
-             * [here](http://pulse-sdks.ooyala.com/pulse-html5/latest/OO.Pulse.AdPlayer.Events.html).
+             * [here](http://pulse-sdks.videoplaza.com/pulse-html5/latest/OO.Pulse.AdPlayer.Events.html).
              * @param event event to listen to
              * @param callback callback function
              */

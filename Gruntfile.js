@@ -6,9 +6,9 @@ module.exports = function(grunt) {
 
     var date = grunt.template.today('yyyy-mm-dd');
     var sourceBanner = '/* \n'                                                                             +
-        '* !<%= pkg.name %> v<%= pkg.version %> built the: '+ date +'  | Ooyala Pulse HTML5 plugin for Brightcove\n' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> by Ooyala, www.ooyala.com \n'  +
-        '* email: info@ooyala.com \n'                                                       +
+        '* !<%= pkg.name %> v<%= pkg.version %> built the: '+ date +'  | INVIDI Pulse HTML5 plugin for Brightcove\n' +
+        '* Copyright (c) <%= grunt.template.today("yyyy") %> by INVIDI, www.invidi.com \n'  +
+        '* email: support@invidi.com \n'                                                       +
         '*/ \n';
 
     // Load the plugin tasks we need
