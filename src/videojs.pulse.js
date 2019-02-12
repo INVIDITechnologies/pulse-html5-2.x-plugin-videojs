@@ -39,6 +39,14 @@
             //Helper flags to ensure that mute state change only get reported when the ads started playing.
             var duringAdPlayback = false;
             var previousAdVolume = 0;
+            
+            var playerIsSetToAutoplay = !!player.autoplay();
+            // player.autoplay() may return:
+            // false (boolean)  - Player should not autoplay.
+            // true (boolean)   - Call play() on every loadstart
+            // 'play' (string)  - Try to autoplay the video.
+            // 'muted' (string) - Call muted() then play() on every loadstart
+            // 'any' (string)   - Call play() on every loadstart. If that fails call muted() then play().
 
             if (!OO || !OO.Pulse) {
                 throw new Error('The Pulse SDK is not included in the page. Be sure to load it before the Pulse plugin for videojs.');
@@ -53,7 +61,7 @@
             // Automatically hide poster if autoplay is enabled
             // (autoplay will not work on the following mobile devices)
             if (!videojs.browser.IS_IOS && !videojs.browser.IS_ANDROID) {
-                if (player.autoplay() || (queryParams.hasOwnProperty('autoplay') && queryParams.autoplay === undefined) || queryParams.autoplay === '1' || queryParams.autoplay === 'true') {
+                if (playerIsSetToAutoplay || (queryParams.hasOwnProperty('autoplay') && queryParams.autoplay === undefined) || queryParams.autoplay === '1' || queryParams.autoplay === 'true') {
                     player.addClass('vjs-pulse-hideposter');
                 }
             } else if (options.hidePoster) {
@@ -64,34 +72,37 @@
             OO.Pulse.setPulseHost(options.pulseHost, options.deviceContainer, options.persistentId);
             //Create the ad player
             createAdContainer();
-
+            
+            log("player.autoplay is set to '" + player.autoplay() + "' [" + playerIsSetToAutoplay + "]");
+            
             var forceSharedElement = queryParams.hasOwnProperty('pulse_force_shared');
 
             if (forceSharedElement) {
                 useShared = true;
                 log('Using shared element because pulse_force_shared parameter is present');
                 
-            } else if(player.autoplay() === false || (queryParams.hasOwnProperty('autoplay') && queryParams.autoplay === 'false')) {
-                adPlayerOptions.setAutoplayAttributes = false;
-                log('Autoplay set to \'false\' by the video player/query parameters, will not try to autoplay ads');
-
             } else {
+            
                 var autoplayMode = 'normal';
-
+                
                 if (typeof OO.Pulse.getAutoplayMode === 'function') {
                     autoplayMode = OO.Pulse.getAutoplayMode();
                 } else if (!isAutoplaySupported()) {
                     autoplayMode = 'shared';
                 }
 
-                if (autoplayMode === 'shared') {
+                if(autoplayMode === 'shared') {
                     useShared = true;
                     log('Using shared element because autoplay support was not detected');
-                } else if (autoplayMode === 'muted') {
+                } else if(autoplayMode === 'muted' && playerIsSetToAutoplay === true) {
                     adPlayerOptions.setAutoplayAttributes = true;
                     log('Using setAutoplayAttributes because autoplay support was not detected');
-                } else if (autoplayMode !== 'normal') {
+                } else if(autoplayMode !== 'normal' && playerIsSetToAutoplay === true) {
                     log('Received unknown autoplay mode: ', autoplayMode, '; it will be ignored');
+                    adPlayerOptions.setAutoplayAttributes = false;
+                } else if(playerIsSetToAutoplay === false) {
+                    log('Autoplay set to \'false\' by the video player/query parameters, will not try to autoplay ads');
+                    adPlayerOptions.setAutoplayAttributes = false;
                 }
             }
 
@@ -137,9 +148,9 @@
                         adMuteStateChangedCallback(eventData);
                    } else {
                         if (!sharedElement) {
-                            if (event.volume == 0) {
+                            if (eventData.volume == 0) {
                                 player.muted(true);
-                            } else if (event.volume == 1) {
+                            } else if (eventData.volume == 1) {
                                 player.muted(false);
                             }
                         }
