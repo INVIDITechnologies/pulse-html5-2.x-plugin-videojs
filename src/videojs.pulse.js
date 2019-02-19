@@ -2,7 +2,7 @@
     'use strict';
 
     function log() {
-        var args = Array.prototype.slice.call(arguments);
+        let args = Array.prototype.slice.call(arguments);
         if (OO.Pulse) {
             if (OO.Pulse.Utils.logTagged) {
                 args.unshift([{ tag: 'vjs', color: '#407A5C' }]);
@@ -16,31 +16,31 @@
         }
     }
 
-    var pulsePlugin = function(options, readyForPrerollCallback, adClickedCallback, adMuteStateChangedCallback) {
+    const pulsePlugin = function(options, readyForPrerollCallback, adClickedCallback, adMuteStateChangedCallback) {
         ((player) => {
-            var session = null;
-            var pageMetadata = options.metadata || {};
-            var vjsControls;
-            var adPlayer;
-            var adContainerDiv;
-            var sharedElement = null;
-            var resizeHandle;
-            var sessionStarted = false;
-            var firstPlay = true;
-            var pauseAdTimeout = null;
-            var isFree = false;
-            var contentUpdated = false;
-            var disabledCues = [];
-            var adPlayerOptions = options.adPlayerOptions || {};
-            var customBehaviours = {};
-            var useShared = false;
-            var playlistItemChange = false;
-            var isContentStartedReported = true;
+            let session = null;
+            let pageMetadata = options.metadata || {};
+            let vjsControls;
+            let adPlayer;
+            let adContainerDiv;
+            let sharedElement = null;
+            let resizeHandle;
+            let sessionStarted = false;
+            let firstPlay = true;
+            let pauseAdTimeout = null;
+            let isFree = false;
+            let contentUpdated = false;
+            let disabledCues = [];
+            let adPlayerOptions = options.adPlayerOptions || {};
+            let customBehaviours = {};
+            let useShared = false;
+            let playlistItemChange = false;
+            let isContentStartedReported = true;
             //Helper flags to ensure that mute state change only get reported when the ads started playing.
-            var duringAdPlayback = false;
-            var previousAdVolume = 0;
+            let duringAdPlayback = false;
+            let previousAdVolume = 0;
             
-            var playerIsSetToAutoplay = !!player.autoplay();
+            const playerIsSetToAutoplay = !!player.autoplay();
             // player.autoplay() may return:
             // false (boolean)  - Player should not autoplay.
             // true (boolean)   - Call play() on every loadstart
@@ -57,7 +57,7 @@
             //Toggle debug mode if option is available.
             OO.Pulse.debug = options.debug || OO.Pulse.debug;
             //Read query string parameters from page's URL.
-            var queryParams = getQueryStringParams();
+            const queryParams = getQueryStringParams();
             // Automatically hide poster if autoplay is enabled
             // (autoplay will not work on the following mobile devices)
             if (!videojs.browser.IS_IOS && !videojs.browser.IS_ANDROID) {
@@ -75,7 +75,7 @@
             
             log("player.autoplay is set to '" + player.autoplay() + "' [" + playerIsSetToAutoplay + "]");
             
-            var forceSharedElement = queryParams.hasOwnProperty('pulse_force_shared');
+            const forceSharedElement = queryParams.hasOwnProperty('pulse_force_shared');
 
             if (forceSharedElement) {
                 useShared = true;
@@ -83,7 +83,7 @@
                 
             } else {
             
-                var autoplayMode = 'normal';
+                let autoplayMode = 'normal';
                 
                 if (typeof OO.Pulse.getAutoplayMode === 'function') {
                     autoplayMode = OO.Pulse.getAutoplayMode();
@@ -99,7 +99,6 @@
                     log('Using setAutoplayAttributes because autoplay support was not detected');
                 } else if(autoplayMode !== 'normal' && playerIsSetToAutoplay === true) {
                     log('Received unknown autoplay mode: ', autoplayMode, '; it will be ignored');
-                    adPlayerOptions.setAutoplayAttributes = false;
                 } else if(playerIsSetToAutoplay === false) {
                     log('Autoplay set to \'false\' by the video player/query parameters, will not try to autoplay ads');
                     adPlayerOptions.setAutoplayAttributes = false;
@@ -142,15 +141,15 @@
             });
 
             adPlayer.addEventListener(OO.Pulse.AdPlayer.Events.AD_VOLUME_CHANGED, (event, eventData) => {
-                if (duringAdPlayback && eventData.volume !== previousAdVolume) {
+                if (duringAdPlayback) {
                    if(adMuteStateChangedCallback) {
                         previousAdVolume = eventData.volume;
                         adMuteStateChangedCallback(eventData);
                    } else {
                         if (!sharedElement) {
-                            if (eventData.volume == 0) {
+                            if (eventData.volume === 0) {
                                 player.muted(true);
-                            } else if (eventData.volume == 1) {
+                            } else if (eventData.volume === 1) {
                                 player.muted(false);
                             }
                         }
@@ -171,7 +170,6 @@
             adPlayer.addEventListener(OO.Pulse.AdPlayer.Events.AD_BREAK_STARTED, () => {
                 player.trigger('ads-pod-started');
                 // Hide the VJS loading spinner
-
             });
 
             adPlayer.addEventListener(OO.Pulse.AdPlayer.Events.AD_BREAK_FINISHED, () => {
@@ -209,8 +207,8 @@
                     return;
                 }
 
-                var enabledCues = 0;
-                for (var i = 0; i < disabledCues.length; ++i) {
+                let enabledCues = 0;
+                for (let i = 0; i < disabledCues.length; ++i) {
                     disabledCues[i].mode = 'showing';
                     ++enabledCues;
                 }
@@ -228,8 +226,8 @@
 
                 showTextTracks();
 
-                for (var i = 0; i < player.textTracks().length; ++i) {
-                    var track = sharedElement.textTracks[i];
+                for (let i = 0; i < player.textTracks().length; ++i) {
+                    const track = sharedElement.textTracks[i];
                     if (track && 'mode' in track && track.mode === 'showing') {
                         track.mode = 'disabled';
                         disabledCues.push(track);
@@ -243,7 +241,7 @@
 
             // Initialize ad session.
 
-            var initialiseAdSession = function() {
+            let initialiseAdSession = function() {
                 doInitSession(player.mediainfo, pageMetadata);
             };
 
@@ -291,7 +289,7 @@
             //                      PUBLIC API
             //=====================================================================
 
-            var PulseAPI = function(adPlayer) {
+            let PulseAPI = function(adPlayer) {
                 /**
                  * Pulse ad player
                  */
@@ -410,7 +408,7 @@
 
             //Merge the brightcove studio metadata with the page metadata
             function mergeMetadata(mediaMetadata, pageMetadata) {
-                var finalMetadata = {};
+                let finalMetadata = {};
 
                 // Brightcove CMS metadata
                 if (mediaMetadata) {
@@ -418,9 +416,9 @@
 
                     // cue points
                     if (mediaMetadata.cue_points && mediaMetadata.cue_points.length > 0) {
-                        var mediaCuePoints = [];
-                        var cuePoint;
-                        for (var i = 0; i < mediaMetadata.cue_points.length; ++i) {
+                        let mediaCuePoints = [];
+                        let cuePoint;
+                        for (let i = 0; i < mediaMetadata.cue_points.length; ++i) {
                             cuePoint = mediaMetadata.cue_points[i];
 
                             if (cuePoint.type === 'AD' && (cuePoint.name === 'vpspot' || cuePoint.name === 'pulse_ad')) {
@@ -435,38 +433,38 @@
                     if (mediaMetadata.custom_fields) {
 
 
-                        var pulseTags = mediaMetadata.custom_fields.pulse_tags || mediaMetadata.custom_fields.vpTags;
+                        const pulseTags = mediaMetadata.custom_fields.pulse_tags || mediaMetadata.custom_fields.vpTags;
                         if (pulseTags) {
                             finalMetadata.tags = pulseTags.split(',');
                         }
 
-                        var pulseFlags = mediaMetadata.custom_fields.pulse_flags || mediaMetadata.custom_fields.vpFlags;
+                        const pulseFlags = mediaMetadata.custom_fields.pulse_flags || mediaMetadata.custom_fields.vpFlags;
                         if (pulseFlags) {
                             finalMetadata.flags = pulseFlags.split(',');
                         }
 
                         // TODO: reinit session if this is present or what?
-                        var pulseHost = mediaMetadata.custom_fields.pulse_host || mediaMetadata.custom_fields.vpHost;
+                        const pulseHost = mediaMetadata.custom_fields.pulse_host || mediaMetadata.custom_fields.vpHost;
                         if (pulseHost) {
                             finalMetadata.pulseHost = pulseHost;
                         }
 
-                        var pulseCategory = mediaMetadata.custom_fields.pulse_category || mediaMetadata.custom_fields.vpCategory;
+                        const pulseCategory = mediaMetadata.custom_fields.pulse_category || mediaMetadata.custom_fields.vpCategory;
                         if (pulseCategory) {
                             finalMetadata.category = pulseCategory;
                         }
 
-                        var pulseContentPartner = mediaMetadata.custom_fields.pulse_content_partner || mediaMetadata.custom_fields.vpContentPartner;
+                        const pulseContentPartner = mediaMetadata.custom_fields.pulse_content_partner || mediaMetadata.custom_fields.vpContentPartner;
                         if (pulseContentPartner) {
                             finalMetadata.contentPartner = pulseContentPartner;
                         }
 
-                        var pulseContentForm = mediaMetadata.custom_fields.pulse_content_form || mediaMetadata.custom_fields.vpContentForm;
+                        const pulseContentForm = mediaMetadata.custom_fields.pulse_content_form || mediaMetadata.custom_fields.vpContentForm;
                         if (pulseContentForm) {
                             finalMetadata.contentForm = pulseContentForm;
                         }
 
-                        var pulseMaxLinearBreakDuration = parseInt(mediaMetadata.custom_fields.pulse_max_linear_break_duration);
+                        const pulseMaxLinearBreakDuration = parseInt(mediaMetadata.custom_fields.pulse_max_linear_break_duration);
                         if (pulseMaxLinearBreakDuration && !isNaN(pulseMaxLinearBreakDuration)) {
                             finalMetadata.maxLinearBreakDuration = pulseMaxLinearBreakDuration;
                         }
@@ -496,7 +494,7 @@
 
                 // Player plugin config or page-level metadata
                 if (pageMetadata) {
-                    for (var key in pageMetadata) {
+                    for (let key in pageMetadata) {
                         if (key === 'tags') {
                             if (!finalMetadata.tags) {
                                 finalMetadata.tags = pageMetadata.tags;
@@ -521,7 +519,7 @@
 
             function doInitSession(mediaMetadata, pageMetadata) {
                 sessionStarted = false;
-                var finalMetadata = mergeMetadata(mediaMetadata, pageMetadata);
+                let finalMetadata = mergeMetadata(mediaMetadata, pageMetadata);
                 initSession.call(this, getContentMetadataFromSessionSettings(finalMetadata),
                     getRequestSettingsFromSessionSettings(finalMetadata));
                 //After ads are fetched, we inform contrib-ads that we're ready to start playing ads.
@@ -530,7 +528,7 @@
 
             //Volume change listener
             function onVolumeChange() {
-                var volume = player.volume();
+                let volume = player.volume();
                 adPlayer.setVolume(volume);
             }
 
@@ -638,8 +636,8 @@
             }
 
             function getQueryStringParams() {
-                var params = {};
-                var ps = [];
+                let params = {};
+                let ps = [];
 
                 try {
                     if (window) {
@@ -658,9 +656,9 @@
                     ps[0] = ps[0].slice(1);
                 }
 
-                for (var i = 0; i < ps.length; i++) {
+                for (let i = 0; i < ps.length; i++) {
                     if (ps[i]) {
-                        var p = ps[i].split(/=/);
+                        let p = ps[i].split(/=/);
                         params[p[0]] = p[1];
                     }
                 }
@@ -689,7 +687,7 @@
             //Detects if a mobile device is used. If that's the case the plugin will used a shared video
             //element to show ads
             function isMobile() {
-                var check = false;
+                let check = false;
                 (function(a) { if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true })(navigator.userAgent || navigator.vendor || window.opera);
                 return check;
             }
@@ -709,7 +707,7 @@
              * @param obj
              */
             function cleanObject(obj) {
-                for (var prop in obj) {
+                for (let prop in obj) {
                     if (obj[prop] === null || obj[prop] === undefined) {
                         delete obj[prop];
                     }
@@ -722,7 +720,7 @@
              * @returns {{category: *, contentForm: (*|string), id: *, contentPartner: *, duration: *, flags: *, tags: *, customParameters: *}}
              */
             function getContentMetadataFromSessionSettings(sessionSettings) {
-                var contentMetadata = {
+                let contentMetadata = {
                     category: sessionSettings.category,
                     contentForm: sessionSettings.contentForm,
                     id: sessionSettings.id,
@@ -746,7 +744,7 @@
              * @returns {{height: *, width: *, maxBitRate: *, linearPlaybackPositions: *, nonlinearPlaybackPositions: *, insertionPointFilter: *, referrerUrl: *, linearSlotSize: *}}
              */
             function getRequestSettingsFromSessionSettings(sessionSettings) {
-                var requestSettings = {
+                let requestSettings = {
                     height: sessionSettings.height,
                     width: sessionSettings.width,
                     maxBitRate: sessionSettings.maxBitRate,
@@ -819,7 +817,7 @@
 
 
             //Ad player listener interface for the ad player
-            var adPlayerListener = {
+            let adPlayerListener = {
                 startContentPlayback: function() {
                     if (player.ads.isInAdMode()) {
                         player.ads.endLinearAdMode();
@@ -886,7 +884,7 @@
         })(this);
     };
 
-    var registerPlugin = videojs.registerPlugin || videojs.plugin;
+    const registerPlugin = videojs.registerPlugin || videojs.plugin;
     registerPlugin('pulse', pulsePlugin);
 
 })(window.videojs);
