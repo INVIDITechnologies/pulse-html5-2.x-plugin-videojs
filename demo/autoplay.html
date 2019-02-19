@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ooyala Pulse plugin for videojs/Brightcove demo</title>
+    <title>(autoplay) Ooyala Pulse plugin for videojs/Brightcove demo</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.4-0/videojs-contrib-ads.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.0/videojs-contrib-ads.css">
 </head>
@@ -80,6 +80,8 @@
                         debug: true,
                         hidePoster: player.autoplay() || params.hasOwnProperty('hideposter')
                     });
+                    player.muted(true);
+                    player.play();
                 });
             }
         }
