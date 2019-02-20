@@ -1,6 +1,6 @@
 # Getting Started with VideoJS
 
->:warning: To integrate, you must have a VideoJS player v5.x up and running on your site, as well as an INVIDI Pulse account and a unique ID (pulseHost).
+>:warning: To integrate, you must have a VideoJS player v5.x up and running on your site, as well as a Pulse account and a unique ID (pulseHost).
 
 1. Load the HTML5 Pulse SDK on the page with your VideoJS player.
 

@@ -9,24 +9,24 @@ var player = videojs('vjsVideo');
 
 ### player.pulse(options, readyForPrerollCallback, adClickedCallback)
 
-Initializes the plugin for the given player.
+Initialises the plugin for the given player.
 
  * **Parameters:**
    * `options` - Plugin options. See the [Plugin Options and Session Settings](options-settings.md) file for their description.
    * `readyForPrerollCallback` - called when prerolls are ready to play. If not set, the ad player automatically starts the session.
-   * `adClickedCallback` - called when an ad is clicked. If null the plugin automatically opens the clickthrough URL and tracks the clickThrough event. The  clickthrough URL is passed as parameter in the method (see the [Customizing Your VideoJS or Brightcove Player Integration](player-customization.md) file for an example)
+   * `adClickedCallback` - called when an ad is clicked. If null the plugin automatically opens the clickthrough URL and tracks the clickThrough event. The  clickthrough URL is passed as parameter in the method (see the [Customising Your VideoJS or Brightcove Player Integration](player-customization.md) file for an example)
 
 ## Properties of player.pulse
 
 ### `adPlayer`
 
-The INVIDI Pulse ad player controller. To get the full ad player SDK, check out the [SDK documentation](http://pulse-sdks.videoplaza.com/pulse-html5/latest/index.html).
+The Pulse ad player controller. To get the full ad player SDK, check out the [SDK documentation](http://pulse-sdks.videoplaza.com/pulse-html5/latest/index.html).
 
 ## Methods of player.pulse
 
 ### `initSession(sessionSettings)`
 
-Initialize a new session. The plugin automatically initializes the session, but the method should be called if you need to override the [Session Settings](options-settings.md#session-settings). The main use case is when the player loads the next video from a playlist. See [Customizing Your VideoJS or Brightcove Player Integration](player-customization.md) for an example.
+Initialise a new session. The plugin automatically initialises the session, but the method should be called if you need to override the [Session Settings](options-settings.md#session-settings). The main use case is when the player loads the next video from a playlist. See [Customising Your VideoJS or Brightcove Player Integration](player-customization.md) for an example.
 
  * **Parameters:** `sessionSettings`  — The session settings list is available in the [Session Settings](options-settings.md#session-settings) file.
 

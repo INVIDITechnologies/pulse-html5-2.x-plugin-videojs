@@ -42,19 +42,19 @@ The plugin is automatically initiated when your player loads. No additional code
 2. Create a script on the page that listens for the player `ready` event and initialize the plugin there:
   ```
   function loadPlayers() {
-    var readyPlayers = videojs.getPlayers();
-    for(var id in readyPlayers) {
-      var player = readyPlayers[id];
-      player.ready(function() {
-        player.pulse({
-          pulseHost: 'http://pulse-demo.videoplaza.tv',
-          metadata: {
-            tags: [ 'standard-linears' ],
-            category: 'skip-always'
-          }
-        });
-      });
-    }
+      var readyPlayers = videojs.getPlayers();
+      for(var id in readyPlayers) {
+          var player = readyPlayers[id];
+          player.ready(function() {
+              player.pulse({
+                  pulseHost: 'http://pulse-demo.videoplaza.tv',
+                  metadata: {
+                      tags: [ 'standard-linears' ],
+                      category: 'skip-always'
+                  }
+              });
+          });
+      }
   }
 
   document.addEventListener('DOMContentLoaded', loadPlayers);
@@ -68,7 +68,7 @@ On your video items in Brightcove Studio, the following custom metadata is read 
 | Name        | Legacy name   | Sample input                      | Description                       |
 |------------ |-------------  |---------------------------------- |---------------------------------- |
 | pulse_tags    | vpTags        | sports,soccer,europe              | Matched against tag targeting rules set up in Pulse; comma separated.   |
-| pulse_flags | vpFlags       | noprerolls,nocom*                     | Prevents certain ad types from being served; comma separated.|
+| pulse_flags | vpFlags       | noprerolls*                     | Prevents certain ad types from being served; comma separated.|
 | pulse_max_linear_break_duration | none        | 15                  | Maximum linear ad break duration in seconds.|
 | pulse_category| vpCategory    | sports                          | Selects alternate ad insertion policies configured in Pulse.  |
 | pulse_content_partner| vpContentPartner|                          |                                   |

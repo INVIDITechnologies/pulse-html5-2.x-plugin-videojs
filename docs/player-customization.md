@@ -25,7 +25,7 @@ By default, the plugin automatically pauses the ad player and opens the click th
 myPlayer.pulse(options, null, function(clickThroughURL){ console.log("the ad was clicked!")});
 ```
 
-If you open the clickthrough URL, be sure to call `adClickThroughOpened` on the plugin's `adPlayer` object to correctly track the event in INVIDI Pulse.
+If you open the clickthrough URL, be sure to call `adClickThroughOpened` on the plugin's `adPlayer` object to correctly track the event to Pulse.
 ```
 myPlayer.pulse.adPlayer.adClickThroughOpened();
 ```
