@@ -149,7 +149,7 @@
                         if (!sharedElement) {
                             if (eventData.volume === 0) {
                                 player.muted(true);
-                            } else if (eventData.volume === 1) {
+                            } else {
                                 player.muted(false);
                             }
                         }
