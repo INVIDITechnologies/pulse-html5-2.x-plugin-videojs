@@ -1,5 +1,5 @@
-### Version 3.0.0 - October 15, 2018
+### Version 3.0.1 - February 20, 2019
 
-First version of the Pulse HTML5 plugin for VideoJS 7 with support for contrib-ads v6 and metadata from Brightcove Studio.
+First official release of the Pulse HTML5 plugin for VideoJS 7 with support for contrib-ads v6 and metadata from Brightcove Studio.
 
 <br><hr/>

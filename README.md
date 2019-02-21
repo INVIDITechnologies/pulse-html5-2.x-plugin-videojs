@@ -1,7 +1,7 @@
-# Ooyala Pulse Plugin for VideoJS and Brightcove Player
+# Pulse Plugin for VideoJS and Brightcove Player
 
 ## Introduction
-The Pulse plugin in this repository can be used to create an integration between Pulse and your VideoJS or Brightcove Player. The plugin is built on top of the Pulse HTML5 ad player, which is part of [ HTML5 Pulse SDK](http://pulse-sdks.ooyala.com/pulse-html5/latest/).
+The Pulse plugin in this repository can be used to create an integration between Pulse and your VideoJS or Brightcove Player. The plugin is built on top of the Pulse HTML5 ad player, which is part of [ HTML5 Pulse SDK](http://pulse-sdks.videoplaza.com/pulse-html5/latest/).
 
 ## Build
     npm install
@@ -24,17 +24,13 @@ Information about each of the plugin options and session settings can be found o
 
 Information about further customizations you can make to the integration can be found on [Customizing Your VideoJS or Brightcove Player Integration](docs/player-customization.md)
 
-## videojs-contrib-ads compatibility table
+## videojs-contrib-ads compatibility
 
-|                | Pulse plugin v1 | Pulse plugin v2 | Pulse plugin v3 |
-|----------------|:---------------:|:---------------:|:---------------:|
-| contrib-ads v3 |        x        |                 |                 |
-| contrib-ads v5 |                 |        x        |        x        |
-| contrib-ads v6 |                 |                 |        x        |
+The Pulse plugin currently supports videojs-contrib-ads v6.x.
 
 
 ## Handling Autoplay 
-This plugin uses contrib ads (the tool for building Video.js Ad Plugins) and follows the [autoplay recommendation notes](https://github.com/videojs/videojs-contrib-ads/blob/master/docs/integrator/autoplay.md). Therefore, we strongly recommend that you do not use `autoplay` attribute on the video element and instead call the `play` function when the player is ready. 
+This plugin uses videojs-contrib-ads (the tool for building Video.js Ad Plugins) and follows the [autoplay recommendation notes](https://github.com/videojs/videojs-contrib-ads/blob/master/docs/integrator/autoplay.md). Therefore, we strongly recommend that you do not use `autoplay` attribute on the video element and instead call the `play` function when the player is ready. 
 ```
 player.ready(function() {
 	//Set up the pulse plugin.

@@ -25,7 +25,7 @@ By default, the plugin automatically pauses the ad player and opens the click th
 myPlayer.pulse(options, null, function(clickThroughURL){ console.log("the ad was clicked!")});
 ```
 
-If you open the clickthrough URL, be sure to call `adClickThroughOpened` on the plugin's `adPlayer` object to correctly track the event in Ooyala Pulse.
+If you open the clickthrough URL, be sure to call `adClickThroughOpened` on the plugin's `adPlayer` object to correctly track the event to Pulse.
 ```
 myPlayer.pulse.adPlayer.adClickThroughOpened();
 ```
@@ -39,7 +39,7 @@ myPlayer.pulse(options, null, null, function(volume){ console.log("User changed 
 
 ## Controlling the ad player
 
-The [Pulse HTML5 ad player](http://pulse-sdks.ooyala.com/pulse-html5/latest/OO.Pulse.AdPlayerController.html) is a public property of the the plugin and can be controlled directly. For example:
+The [Pulse HTML5 ad player](http://pulse-sdks.videoplaza.com/pulse-html5/latest/OO.Pulse.AdPlayerController.html) is a public property of the the plugin and can be controlled directly. For example:
 ```
 myPlayer.pulse.adPlayer.pause();
 ```
