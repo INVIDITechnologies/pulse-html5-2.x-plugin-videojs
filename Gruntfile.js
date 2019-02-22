@@ -63,7 +63,11 @@ module.exports = function(grunt) {
                 }
             },
         },
+        eslint: {
+            target: ['src/*.js']
+        }
     });
 
+    grunt.registerTask('lint', [ 'clean', 'concat', 'eslint', 'babel', 'uglify' ]);
     grunt.registerTask('default', [ 'clean', 'concat', 'babel', 'uglify' ]);
 };
