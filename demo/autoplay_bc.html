@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>(autoplay) Ooyala Pulse plugin for videojs/Brightcove demo</title>
+  </head>
+
+<body>
+<div id="main">
+    <!-- Brightcove player and playlist div -->
+    <video
+        data-account="3110396001"
+        data-player="ryoaUBpYZ"
+        data-playlist-id="4901749008001"
+        data-embed="default"
+        data-application-id
+        class="video-js"
+        controls
+        playsinline
+        style="width: 640px; height: 360px;">
+    </video>
+    <ol class="vjs-playlist" style="width: 400px"></ol>
+    <script src="https://players.brightcove.net/3110396001/ryoaUBpYZ_default/index.min.js"></script>
+    <script>
+            var readyPlayers = videojs.getPlayers();
+            for(var id in readyPlayers) {
+                var player = readyPlayers[id];
+                player.ready(function() {
+                    player.muted(true);
+                    player.play();
+                });
+            }
+    </script>
+</div>
+</body>
+</html>

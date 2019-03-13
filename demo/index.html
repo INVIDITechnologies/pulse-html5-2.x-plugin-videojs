@@ -3,7 +3,7 @@
 <head>
     <title>Pulse plugin for videojs/Brightcove demo</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.4-0/videojs-contrib-ads.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.0/videojs-contrib-ads.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.1/videojs-contrib-ads.css">
 </head>
 
 <body>
@@ -17,14 +17,15 @@
         data-application-id
         class="video-js"
         controls
-        style="width: 1280px; height: 720px;">
+        playsinline
+        style="width: 640px; height: 360px;">
     </video>
     <ol class="vjs-playlist" style="width: 400px"></ol>
     <!-- Scripts: Pulse SDK, Ad Player skin, Brightcove player source, videojs-contrib-ads, this plugin -->
     <script src="https://service.videoplaza.tv/proxy/pulse-sdk-html5/2.1/latest.min.js"></script>
     <script src="https://service.videoplaza.tv/proxy/pulse-sdk-html5-skin/base.min.js"></script>
     <script src="https://players.brightcove.net/3110396001/ryoaUBpYZ_default/index.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.0/videojs-contrib-ads.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.1/videojs-contrib-ads.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.4-0/videojs-contrib-ads.min.js"></script> -->
     <!-- <script src="../dist/videojs.pulse-3.0.1.js"></script> -->
     <script src="../src/videojs.pulse.js"></script>
@@ -81,12 +82,15 @@
                         hidePoster: player.autoplay() || params.hasOwnProperty('hideposter')
                     });
                 });
+                // Workaround to avoid clicking extra(redundant) play button in Safari by starting the ad(s) muted.
+                if(videojs.browser.IS_SAFARI) {
+                  player.muted(true);
+                }
             }
         }
 
         document.addEventListener("DOMContentLoaded", loadPlayers);
     </script>
-</div>
 </div>
 </body>
 </html>
