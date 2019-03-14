@@ -43,7 +43,10 @@ To get started with the integration and configure your Pulse hostname and additi
   ```
   See [Plugin Options and Session Settings](options-settings.md) for all possible options you can set.
 
-5. Click Save.
+5. In the Plugins page, click _Stylesheets_ tab and add stylesheet for videojs-contrib-ads:
+    https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.1/videojs-contrib-ads.css
+
+6. Publish changes.
 
 The plugin is automatically initiated when your player loads. No additional code is needed on the client side (Refer file https://github.com/INVIDITechnologies/pulse-html5-2.x-plugin-videojs/blob/master/demo/index_bc.html).
 
