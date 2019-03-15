@@ -29,16 +29,19 @@ Information about further customizations you can make to the integration can be 
 The Pulse plugin currently supports videojs-contrib-ads v6.x.
 
 
-## Handling Autoplay 
-This plugin uses videojs-contrib-ads (the tool for building Video.js Ad Plugins) and follows the [autoplay recommendation notes](https://github.com/videojs/videojs-contrib-ads/blob/master/docs/integrator/autoplay.md). Therefore, we strongly recommend that you do not use `autoplay` attribute on the video element and instead call the `play` function when the player is ready. 
+## Handling Autoplay
+This plugin uses videojs-contrib-ads (the tool for building Video.js Ad Plugins) and follows the [autoplay recommendation notes](https://github.com/videojs/videojs-contrib-ads/blob/master/docs/integrator/autoplay.md). Therefore, we strongly recommend that you do not use `autoplay` attribute on the video element and instead call the `play` function when the player is ready.
 ```
 player.ready(function() {
 	//Set up the pulse plugin.
 	player.pulse({....});
-	//Create the autoplay behaviour. 
+	//Create the autoplay behaviour.
 	player.play();
 });
 ```
+## IFrame
+Please refer example at https://github.com/INVIDITechnologies/pulse-html5-2.x-plugin-videojs/blob/master/demo/iframeTest.html if player is needed to be embed into an iframe.
+
 ## API Docs
 The full API docs are available in the [API Documentation](docs/videojs-pulse.md).
 
