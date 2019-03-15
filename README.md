@@ -40,7 +40,7 @@ player.ready(function() {
 });
 ```
 ## IFrame
-Please refer example at https://github.com/INVIDITechnologies/pulse-html5-2.x-plugin-videojs/blob/master/demo/iframeTest.html if player is needed to be embed into an iframe.
+Please refer to example at https://github.com/INVIDITechnologies/pulse-html5-2.x-plugin-videojs/blob/master/demo/iframeTest.html if player is needed to be embed into an iframe.
 
 ## API Docs
 The full API docs are available in the [API Documentation](docs/videojs-pulse.md).
