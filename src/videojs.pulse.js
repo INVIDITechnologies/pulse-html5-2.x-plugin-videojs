@@ -52,15 +52,23 @@
                 throw new Error('The Pulse SDK is not included in the page. Be sure to load it before the Pulse plugin for videojs.');
             }
 
+            // Make sure that 'liveCuePoints' is set to false by default.
+            // This will make sure preroll ads play with sound on live content.
+            const contribAdsOptions = options['contrib-ads-options'];
+            if( !contribAdsOptions.hasOwnProperty('liveCuePoints') ) {
+                contribAdsOptions['liveCuePoints'] = false;
+            }
+            
             //Init videojs-contrib-ads plugin
-            player.ads(options['contrib-ads-options']);
+            player.ads(contribAdsOptions);
+            
             //Toggle debug mode if option is available.
             OO.Pulse.debug = options.debug || OO.Pulse.debug;
             //Read query string parameters from page's URL.
             const queryParams = getQueryStringParams();
             // Automatically hide poster if autoplay is enabled
             // (autoplay will not work on the following mobile devices)
-            if (!videojs.browser.IS_IOS && !videojs.browser.IS_ANDROID) {
+            if (!vjs.browser.IS_IOS && !vjs.browser.IS_ANDROID) {
                 if (playerIsSetToAutoplay || (queryParams.hasOwnProperty('autoplay') && queryParams.autoplay === undefined) || queryParams.autoplay === '1' || queryParams.autoplay === 'true') {
                     player.addClass('vjs-pulse-hideposter');
                 }
@@ -87,6 +95,7 @@
                 
                 if (typeof OO.Pulse.getAutoplayMode === 'function') {
                     autoplayMode = OO.Pulse.getAutoplayMode();
+                    log("getAutoplayMode says: " + autoplayMode);
                 } else if (!isAutoplaySupported()) {
                     autoplayMode = 'shared';
                 }
@@ -884,7 +893,7 @@
         })(this);
     };
 
-    const registerPlugin = videojs.registerPlugin || videojs.plugin;
+    const registerPlugin = vjs.registerPlugin || vjs.plugin;
     registerPlugin('pulse', pulsePlugin);
 
 })(window.videojs);
