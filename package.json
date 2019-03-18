@@ -1,6 +1,6 @@
 {
   "name": "videojs.pulse",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "babel-preset-env": "^1.7.0",
