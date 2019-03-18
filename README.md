@@ -34,16 +34,19 @@ This plugin uses videojs-contrib-ads (the tool for building Video.js Ad Plugins)
 player.ready(function() {
 	//Set up the pulse plugin.
 	player.pulse({....});
-	//Create the autoplay behaviour. 
+	//Create the autoplay behaviour.
 	player.play();
 });
 ```
 
 ## Live content
-The Pulse plugin supports prerolls in live content. Midrolls can also be triggered if the content stream outputs valid position data. 
+The Pulse plugin supports prerolls in live content. Midrolls will be triggered if the content stream outputs valid position data, 'manual' triggering is not supported. 
 
 **Note:** If not already set, the Pulse plugin will set the videojs-contrib-ads option `liveCuePoints` to 'false'. This will make sure that the content stays paused during prerolls, not playing muted underneath the ads.
 See the videojs-contrib-ads [documentation](http://videojs.github.io/videojs-contrib-ads/integrator/options.html) for more information.
+
+## IFrame
+Please refer to example at https://github.com/INVIDITechnologies/pulse-html5-2.x-plugin-videojs/blob/master/demo/iframeTest.html for use in iframes.
 
 ## API Docs
 The full API docs are available in the [API Documentation](docs/videojs-pulse.md).
