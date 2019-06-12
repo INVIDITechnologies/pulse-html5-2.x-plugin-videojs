@@ -8,17 +8,17 @@ data-playlist-id="5995240177001" -->
         <meta charset="utf-8"/>
         <title>VideoJS Pulse ad player bridge</title>
         <link href="//vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.1/videojs-contrib-ads.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.4/videojs-contrib-ads.css">
     </head>
-    
+
     <body>
         <script src="//service.videoplaza.tv/proxy/pulse-sdk-html5/2.1/latest.min.js"></script>
         <!--Include the pulse SDK ad player skin if you need it.-->
         <script src="//service.videoplaza.tv/proxy/pulse-sdk-html5-skin/base.min.js"></script>
         <script src="//vjs.zencdn.net/7.4.1/video.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.1/videojs-contrib-ads.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.4/videojs-contrib-ads.js"></script>
         <script src="../src/videojs.pulse.js"></script>
-      
+
         <div id="main">
             <div id="player_container">
                 <div id='container' style='width:100%; height:100%;'>
@@ -35,7 +35,7 @@ data-playlist-id="5995240177001" -->
 
         <script>
             var player = videojs('vjsVideo', {liveui: true});
-            
+
             var init = function() {
                 player.pulse({
                     pulseHost : 'https://pulse-demo.videoplaza.tv',
@@ -51,7 +51,7 @@ data-playlist-id="5995240177001" -->
                     hidePoster: true
                 });
             };
-            
+
             if(videojs.browser.IS_IOS) {
                 player.ready(init);
             } else {
@@ -61,10 +61,9 @@ data-playlist-id="5995240177001" -->
                 }
                 init();
             }
-            
-        </script>
-        
-    </body>
-    
-</html>
 
+        </script>
+
+    </body>
+
+</html>

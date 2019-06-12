@@ -44,7 +44,7 @@ To get started with the integration and configure your Pulse hostname and additi
   See [Plugin Options and Session Settings](options-settings.md) for all possible options you can set.
 
 5. In the Plugins page, click _Stylesheets_ tab and add stylesheet for videojs-contrib-ads:
-    https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.1/videojs-contrib-ads.css
+    https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.6.4/videojs-contrib-ads.css
 
 6. Publish changes.
 
