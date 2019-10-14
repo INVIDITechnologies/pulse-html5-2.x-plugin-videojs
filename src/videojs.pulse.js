@@ -439,8 +439,8 @@
                             finalMetadata.linearPlaybackPositions = mediaCuePoints;
                         }
                     }
+                    
                     if (mediaMetadata.custom_fields) {
-
 
                         const pulseTags = mediaMetadata.custom_fields.pulse_tags || mediaMetadata.custom_fields.vpTags;
                         if (pulseTags) {
@@ -452,10 +452,24 @@
                             finalMetadata.flags = pulseFlags.split(',');
                         }
 
-                        // TODO: reinit session if this is present or what?
+                        const insertionPointFilter = mediaMetadata.custom_fields.pulse_insertion_point_filter;
+                        if (insertionPointFilter) {
+                            finalMetadata.insertionPointFilter = insertionPointFilter.split(',');
+                        }
+
                         const pulseHost = mediaMetadata.custom_fields.pulse_host || mediaMetadata.custom_fields.vpHost;
                         if (pulseHost) {
                             finalMetadata.pulseHost = pulseHost;
+                        }
+
+                        const seekMode = mediaMetadata.custom_fields.pulse_seek_mode;
+                        if (seekMode) {
+                            finalMetadata.seekMode = seekMode;
+                        }
+
+                        const preferredMediaFormat = mediaMetadata.custom_fields.pulse_preferred_media_format;
+                        if (preferredMediaFormat) {
+                            finalMetadata.preferredMediaFormat = preferredMediaFormat;
                         }
 
                         const pulseCategory = mediaMetadata.custom_fields.pulse_category || mediaMetadata.custom_fields.vpCategory;
@@ -729,17 +743,7 @@
              * @returns {{category: *, contentForm: (*|string), id: *, contentPartner: *, duration: *, flags: *, tags: *, customParameters: *}}
              */
             function getContentMetadataFromSessionSettings(sessionSettings) {
-                let contentMetadata = {
-                    category: sessionSettings.category,
-                    contentForm: sessionSettings.contentForm,
-                    id: sessionSettings.id,
-                    contentPartner: sessionSettings.contentPartner,
-                    duration: sessionSettings.duration,
-                    flags: sessionSettings.flags,
-                    tags: sessionSettings.tags,
-                    customParameters: sessionSettings.customParameters
-
-                };
+                let contentMetadata = JSON.parse(JSON.stringify(sessionSettings));;
 
                 //Remove the empty elements for the SDK
                 cleanObject(contentMetadata);
@@ -753,26 +757,9 @@
              * @returns {{height: *, width: *, maxBitRate: *, linearPlaybackPositions: *, nonlinearPlaybackPositions: *, insertionPointFilter: *, referrerUrl: *, linearSlotSize: *}}
              */
             function getRequestSettingsFromSessionSettings(sessionSettings) {
-                let requestSettings = {
-                    height: sessionSettings.height,
-                    width: sessionSettings.width,
-                    maxBitRate: sessionSettings.maxBitRate,
-                    linearPlaybackPositions: sessionSettings.linearPlaybackPositions,
-                    nonlinearPlaybackPositions: sessionSettings.nonlinearPlaybackPositions,
-                    insertionPointFilter: sessionSettings.insertionPointFilter,
-                    referrerUrl: sessionSettings.referrerUrl,
-                    linearSlotSize: sessionSettings.linearSlotSize,
-                    maxLinearBreakDuration: sessionSettings.maxLinearBreakDuration,
-                    enforceCacheBusting: sessionSettings.enforceCacheBusting,
-                    useVASTSkipOffset: sessionSettings.useVASTSkipOffset,
-                    seekMode: sessionSettings.seekMode,
-                    preferredMediaFormat: sessionSettings.preferredMediaFormat,
-                    liveParameters: sessionSettings.liveParameters,
-                    enableGdpr: sessionSettings.enableGdpr,
-                    gdprConsentString: sessionSettings.gdprConsentString,
-                    gdprPersonalDataIncluded: sessionSettings.gdprPersonalDataIncluded
-                };
-
+                
+                const requestSettings = JSON.parse(JSON.stringify(sessionSettings));
+                
                 requestSettings.width = requestSettings.width || player.currentWidth();
                 requestSettings.height = requestSettings.height || player.currentHeight();
 

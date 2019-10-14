@@ -34,14 +34,14 @@
 
         <script>
             var player = videojs('vjsVideo');
-
+            
             var init = function() {
                 player.pulse({
                     pulseHost : 'http://pulse-demo.videoplaza.tv',
                     metadata: {
                         tags: [ 'standard-linears' ],
-                        // flags: [ 'noprerolls' ],
                         category: 'skip-always',
+                        midrollBreakNumber: 2,
                         linearPlaybackPositions: [ 10, 20 ]
                     },
                     'contrib-ads-options': {
