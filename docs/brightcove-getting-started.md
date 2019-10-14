@@ -107,14 +107,22 @@ On your video items in Brightcove Studio, the following custom metadata is read 
 | pulse_category| vpCategory    | sports                          | Selects alternate ad insertion policies configured in Pulse.  |
 | pulse_content_partner| vpContentPartner|                          |                                   |
 | pulse_content_form| vpContentForm | shortForm _or_ longForm               | Selects ad insertion policies configured in Pulse for short/long form content.  |
+| pulse_insertion_point_filter| N/A | onBeforeContent** | If set, only these specific ad types will be requested.  |
 
 :bulb: Additionally, cue points of type _ad_, with a name of either `vpspot` or `pulse_spot` are used to trigger midroll ads, and tags provided under the _Video Information_ section in Brightcove Studio are merged with values from `pulse_tags` metadata set on the individual video items.
 
-_*Full list of available flags:_
+_* Full list of available flags:_
 - **noprerolls**: do not serve preroll ads
 - **nomidrolls**: do not serve midroll ads
 - **nopostrolls**: do not serve postroll ads
 - **nocom**: do not serve any ads
+
+_** Full list of available insertion point types:_
+- **onBeforeContent**: Prerolls
+- **playbackPosition**: Midrolls
+- **onContentEnd**: Postrolls
+- **onPause**: Pause ads
+- **playbackTime**: Overlays
 
 
 ## API Docs
