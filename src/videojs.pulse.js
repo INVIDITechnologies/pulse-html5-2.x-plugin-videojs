@@ -743,7 +743,8 @@
              * @returns {{category: *, contentForm: (*|string), id: *, contentPartner: *, duration: *, flags: *, tags: *, customParameters: *}}
              */
             function getContentMetadataFromSessionSettings(sessionSettings) {
-                let contentMetadata = JSON.parse(JSON.stringify(sessionSettings));;
+                
+                let contentMetadata = JSON.parse(JSON.stringify(sessionSettings));
 
                 //Remove the empty elements for the SDK
                 cleanObject(contentMetadata);
